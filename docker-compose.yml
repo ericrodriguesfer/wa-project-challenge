@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+
+  database:
+    container_name: 'database-wa-project'
+    image: 'postgres:13-alpine'
+    environment:
+      - POSTGRES_USER=${TYPEORM_USERNAME}
+      - POSTGRES_PASSWORD=${TYPEORM_PASSWORD}
+      - POSTGRES_DB=${TYPEORM_DATABASE}
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    ports:
+      - ${TYPEORM_PORT}:5432
+    restart: unless-stopped
