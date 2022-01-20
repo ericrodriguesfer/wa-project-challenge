@@ -9,7 +9,7 @@ import {
 @Entity('address')
 class Address {
   @PrimaryGeneratedColumn('increment')
-  id: string;
+  id: number;
 
   @Column()
   street: string;

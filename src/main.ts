@@ -11,7 +11,6 @@ async function bootstrap() {
       'This api is a proposed solution to the backend challenge at Wa Project relation a vacancy work',
     )
     .setVersion('1.0')
-    .addTag('challenge')
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('doc', app, document);
