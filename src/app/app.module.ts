@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AddressModule } from 'src/modules/address/address.module';
 import Address from 'src/modules/address/infra/typeorm/entities/Address';
 import Laboratory from 'src/modules/laboratory/infra/typeorm/entities/Laboratory';
 import { LaboratoryModule } from 'src/modules/laboratory/laboratory.module';
