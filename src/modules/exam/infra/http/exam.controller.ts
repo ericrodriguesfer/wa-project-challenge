@@ -18,6 +18,7 @@ import {
   ApiOkResponse,
   ApiOperation,
   ApiTags,
+  ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import CreateExamDTO from '../../dto/CreateExamDTO';
 import UpdateExamDTO from '../../dto/UpdateExamDTO';
@@ -165,6 +166,10 @@ class ExamController {
   })
   @ApiConflictResponse({
     description: 'This exam has ben it is status disable',
+  })
+  @ApiUnauthorizedResponse({
+    description:
+      'This exam have association active with at least one laboratory',
   })
   @ApiInternalServerErrorResponse({
     description: 'Error intern in server, please try again',

@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import Association from '../association/infra/typeorm/entities/Association';
 import Category from '../category/infra/typeorm/entities/Category';
 import ExamController from './infra/http/exam.controller';
 import Exam from './infra/typeorm/entities/Exam';
@@ -13,7 +14,10 @@ import ListExamsNotActive from './services/listExamsNotActive.service';
 import UpdateExamService from './services/updateExam.service';
 
 @Module({
-  imports: [ConfigModule.forRoot(), TypeOrmModule.forFeature([Exam, Category])],
+  imports: [
+    ConfigModule.forRoot(),
+    TypeOrmModule.forFeature([Exam, Category, Association]),
+  ],
   controllers: [ExamController],
   providers: [
     CreateExamService,

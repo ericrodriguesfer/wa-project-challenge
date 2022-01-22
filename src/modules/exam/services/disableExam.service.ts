@@ -3,8 +3,10 @@ import {
   Injectable,
   InternalServerErrorException,
   NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import Association from 'src/modules/association/infra/typeorm/entities/Association';
 import { Repository } from 'typeorm';
 import Exam from '../infra/typeorm/entities/Exam';
 
@@ -12,6 +14,8 @@ import Exam from '../infra/typeorm/entities/Exam';
 class DisableExamService {
   constructor(
     @InjectRepository(Exam) private examRepository: Repository<Exam>,
+    @InjectRepository(Association)
+    private associationRepository: Repository<Association>,
   ) {}
 
   async execute(id: number): Promise<Exam> {
@@ -26,6 +30,15 @@ class DisableExamService {
 
       if (!exam.status) {
         throw new ConflictException('This exam has ben not active');
+      }
+
+      const associations: Array<Association> =
+        await this.associationRepository.find({ where: { exam_id: exam.id } });
+
+      if (associations.length > 0) {
+        throw new UnauthorizedException(
+          'This exam has associations with at least one laboratory',
+        );
       }
 
       const disableExam: Exam = await this.examRepository.merge(exam, {

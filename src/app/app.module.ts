@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import Address from 'src/modules/address/infra/typeorm/entities/Address';
+import { AssociationModule } from 'src/modules/association/association.module';
+import Association from 'src/modules/association/infra/typeorm/entities/Association';
 import { CategoryModule } from 'src/modules/category/category.module';
 import Category from 'src/modules/category/infra/typeorm/entities/Category';
 import { ExamModule } from 'src/modules/exam/exam.module';
@@ -21,11 +23,12 @@ import { AppService } from './services/app.service';
       username: process.env.TYPEORM_USERNAME,
       password: process.env.TYPEORM_PASSWORD,
       database: process.env.TYPEORM_DATABASE,
-      entities: [Address, Laboratory, Category, Exam],
+      entities: [Address, Laboratory, Category, Exam, Association],
     }),
     LaboratoryModule,
     CategoryModule,
     ExamModule,
+    AssociationModule,
   ],
   controllers: [AppController],
   providers: [AppService],
