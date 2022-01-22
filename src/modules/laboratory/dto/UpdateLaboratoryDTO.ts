@@ -7,7 +7,7 @@ class UpdateLaboratoryDTO {
   @IsOptional({
     message: 'This name variable is optional in update',
   })
-  @ApiProperty()
+  @ApiProperty({ required: false })
   name?: string;
 
   @IsString({ message: 'This street variable of address need to be string' })
@@ -15,7 +15,7 @@ class UpdateLaboratoryDTO {
   @IsOptional({
     message: 'This street variable of address is optional in update',
   })
-  @ApiProperty()
+  @ApiProperty({ required: false })
   street?: string;
 
   @IsInt({ message: 'This number variable of address need to be a number' })
@@ -23,7 +23,7 @@ class UpdateLaboratoryDTO {
   @IsOptional({
     message: 'This number variable of address is optional in update',
   })
-  @ApiProperty()
+  @ApiProperty({ required: false })
   number?: number;
 
   @IsString({ message: 'This district variable of address need to be string' })
@@ -31,7 +31,7 @@ class UpdateLaboratoryDTO {
   @IsOptional({
     message: 'This district variable of address is optional in update',
   })
-  @ApiProperty()
+  @ApiProperty({ required: false })
   district?: string;
 
   @IsString({ message: 'This city variable of address need to be string' })
@@ -39,7 +39,7 @@ class UpdateLaboratoryDTO {
   @IsOptional({
     message: 'This city variable of address is optional in update',
   })
-  @ApiProperty()
+  @ApiProperty({ required: false })
   city?: string;
 
   @IsString({ message: 'This state variable of address need to be string' })
@@ -47,7 +47,7 @@ class UpdateLaboratoryDTO {
   @IsOptional({
     message: 'This state variable of address is optional in update',
   })
-  @ApiProperty()
+  @ApiProperty({ required: false })
   state?: string;
 }
 
