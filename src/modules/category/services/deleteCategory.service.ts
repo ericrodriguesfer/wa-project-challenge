@@ -1,7 +1,7 @@
 import {
   Injectable,
   InternalServerErrorException,
-  NotAcceptableException,
+  NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
@@ -21,7 +21,7 @@ class DeleteCategoryService {
       });
 
       if (!category) {
-        throw new NotAcceptableException(
+        throw new NotFoundException(
           'This category does not exists in our database',
         );
       }

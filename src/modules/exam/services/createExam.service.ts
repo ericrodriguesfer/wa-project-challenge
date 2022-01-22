@@ -1,4 +1,5 @@
 import {
+  ConflictException,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
@@ -34,7 +35,7 @@ class CreateExamService {
       });
 
       if (examExistsByName) {
-        throw new NotFoundException('This exam already exists');
+        throw new ConflictException('This exam already exists');
       }
 
       const exam: Exam = await this.examRepository.create({
