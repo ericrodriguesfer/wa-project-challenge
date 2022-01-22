@@ -185,6 +185,10 @@ class LaboratoryController {
   @ApiConflictResponse({
     description: 'This laboratory has ben it is status disable',
   })
+  @ApiUnauthorizedResponse({
+    description:
+      'This laboratory have association active with at least one exam',
+  })
   @ApiInternalServerErrorResponse({
     description: 'Error intern in server, please try again',
   })
