@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   Column,
   CreateDateColumn,
@@ -9,15 +10,19 @@ import {
 @Entity('category')
 class Category {
   @PrimaryGeneratedColumn('increment')
+  @ApiProperty()
   id: number;
 
   @Column()
+  @ApiProperty()
   name: string;
 
   @CreateDateColumn({ type: 'timestamp' })
+  @ApiProperty()
   created_at: Date;
 
   @UpdateDateColumn({ type: 'timestamp' })
+  @ApiProperty()
   updated_at: Date;
 }
 
