@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
+import IReturnStatmentDeleteCategory from '../dto/IReturnStatmentDeleteCategory';
 import Category from '../infra/typeorm/entities/Category';
 
 @Injectable()
@@ -14,7 +15,7 @@ class DeleteCategoryService {
     private categoryRepository: Repository<Category>,
   ) {}
 
-  async execute(id: number): Promise<boolean> {
+  async execute(id: number): Promise<IReturnStatmentDeleteCategory> {
     try {
       const category: Category = await this.categoryRepository.findOne({
         where: { id },
@@ -30,9 +31,9 @@ class DeleteCategoryService {
         await this.categoryRepository.delete(category.id);
 
       if (deletedCategory.affected === 1) {
-        return true;
+        return { message: 'This category was deleted with success' };
       } else {
-        return false;
+        return { message: 'This category was not successfully deleted' };
       }
     } catch (error) {
       if (error) throw error;

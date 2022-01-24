@@ -21,6 +21,7 @@ import {
 import Laboratory from 'src/modules/laboratory/infra/typeorm/entities/Laboratory';
 import CreateAssociationDTO from '../../dto/CreateAssociationDTO';
 import FindLaboratorysOfExamDTO from '../../dto/FindLaboratorysOfExamDTO';
+import IReturnStatmentDeleteAssociation from '../../dto/IReturnStatmentDeleteAssociation';
 import CreateAssociationService from '../../services/createAssociation.service';
 import DeleteAssociantionService from '../../services/deleteAssociation.service';
 import FindAllLaboratorysOfExamAssociationService from '../../services/findAllLaboratorysOfExamAssociation.service';
@@ -110,7 +111,9 @@ class AssociationController {
   @ApiInternalServerErrorResponse({
     description: 'Error intern in server, please try again',
   })
-  deleteAssociation(@Param('id') id: number): Promise<boolean> {
+  deleteAssociation(
+    @Param('id') id: number,
+  ): Promise<IReturnStatmentDeleteAssociation> {
     return this.deleteAssociationService.execute(id);
   }
 }

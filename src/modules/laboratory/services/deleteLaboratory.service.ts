@@ -7,6 +7,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import Address from 'src/modules/address/infra/typeorm/entities/Address';
 import DeleteAddressService from 'src/modules/address/services/deleteAddress.service';
 import { DeleteResult, Repository } from 'typeorm';
+import IReturnStatmnetDeleteLaboratory from '../dto/IReturnStatmnetDeleteLaboratory';
 import Laboratory from '../infra/typeorm/entities/Laboratory';
 
 @Injectable()
@@ -18,7 +19,7 @@ class DeleteLaboratoryService {
     private deleteAddressService: DeleteAddressService,
   ) {}
 
-  async execute(id: number): Promise<boolean> {
+  async execute(id: number): Promise<IReturnStatmnetDeleteLaboratory> {
     try {
       const laboratory: Laboratory = await this.laboratoryRepository.findOne({
         where: { id },
@@ -36,9 +37,9 @@ class DeleteLaboratoryService {
       if (successDeleteLaboratory.affected === 1) {
         await this.deleteAddressService.execute(laboratory.address_id);
 
-        return true;
+        return { message: 'This laboratory was deleted with success' };
       } else {
-        return false;
+        return { message: 'This laboratory was not successfully deleted' };
       }
     } catch (error) {
       if (error) throw error;

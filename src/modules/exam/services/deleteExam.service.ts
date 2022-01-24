@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
+import IReturnStatmentDeleteExam from '../dto/IReturnStatmentDeleteExam';
 import Exam from '../infra/typeorm/entities/Exam';
 
 @Injectable()
@@ -13,7 +14,7 @@ class DeleteExamService {
     @InjectRepository(Exam) private examRepository: Repository<Exam>,
   ) {}
 
-  async execute(id: number): Promise<boolean> {
+  async execute(id: number): Promise<IReturnStatmentDeleteExam> {
     try {
       const exam: Exam = await this.examRepository.findOne({ where: { id } });
 
@@ -28,9 +29,9 @@ class DeleteExamService {
       );
 
       if (successDeleteExam.affected === 1) {
-        return true;
+        return { message: 'This exam was deleted with success' };
       } else {
-        return false;
+        return { message: 'This exam was not successfully deleted' };
       }
     } catch (error) {
       if (error) throw error;
