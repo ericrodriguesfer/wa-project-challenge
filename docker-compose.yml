@@ -2,6 +2,17 @@ version: '3'
 
 services:
 
+  api:
+    container_name: 'wa-project-challenge-api'
+    build: .
+    ports:
+      - ${PORT}:${PORT}
+    volumes:
+      - .:/home/api
+    environment:
+      - TYPEORM_HOST=database
+      - TYPEORM_PORT=5432
+
   database:
     container_name: 'database-wa-project'
     image: 'postgres:13-alpine'
