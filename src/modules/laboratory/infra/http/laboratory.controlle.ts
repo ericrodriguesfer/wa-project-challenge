@@ -21,6 +21,7 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import CreateLaboratoryDTO from '../../dto/CreateLaboratoryDTO';
+import IReturnStatmnetDeleteLaboratory from '../../dto/IReturnStatmnetDeleteLaboratory';
 import UpdateLaboratoryDTO from '../../dto/UpdateLaboratoryDTO';
 import ActivateLaboratoryService from '../../services/activateLaboratory.service';
 import CreateLaboratoryService from '../../services/createLaboratory.service';
@@ -211,7 +212,9 @@ class LaboratoryController {
   @ApiInternalServerErrorResponse({
     description: 'Error intern in server, please try again',
   })
-  deleteLaboratory(@Param('id') id: number): Promise<boolean> {
+  deleteLaboratory(
+    @Param('id') id: number,
+  ): Promise<IReturnStatmnetDeleteLaboratory> {
     return this.deleteLaboratoryService.execute(id);
   }
 }

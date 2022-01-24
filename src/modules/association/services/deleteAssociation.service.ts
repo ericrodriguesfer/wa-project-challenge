@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
+import IReturnStatmentDeleteAssociation from '../dto/IReturnStatmentDeleteAssociation';
 import Association from '../infra/typeorm/entities/Association';
 
 @Injectable()
@@ -14,7 +15,7 @@ class DeleteAssociantionService {
     private associationRepository: Repository<Association>,
   ) {}
 
-  async execute(id: number): Promise<boolean> {
+  async execute(id: number): Promise<IReturnStatmentDeleteAssociation> {
     try {
       const association: Association = await this.associationRepository.findOne(
         { where: { id } },
@@ -30,9 +31,9 @@ class DeleteAssociantionService {
         await this.associationRepository.delete(association.id);
 
       if (deletedAssociation.affected === 1) {
-        return true;
+        return { message: 'This association was deleted with success' };
       } else {
-        return false;
+        return { message: 'This association was not successfully deleted' };
       }
     } catch (error) {
       if (error) throw error;

@@ -21,6 +21,7 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import CreateExamDTO from '../../dto/CreateExamDTO';
+import IReturnStatmentDeleteExam from '../../dto/IReturnStatmentDeleteExam';
 import UpdateExamDTO from '../../dto/UpdateExamDTO';
 import ActivateExamService from '../../services/activateExam.service';
 import CreateExamService from '../../services/createExam.service';
@@ -193,7 +194,7 @@ class ExamController {
   @ApiInternalServerErrorResponse({
     description: 'Error intern in server, please try again',
   })
-  deleteExam(@Param('id') id: number): Promise<boolean> {
+  deleteExam(@Param('id') id: number): Promise<IReturnStatmentDeleteExam> {
     return this.deleteExamService.execute(id);
   }
 }

@@ -20,6 +20,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import CreateCategoryDTO from '../../dto/CreateCategoryDTO';
+import IReturnStatmentDeleteCategory from '../../dto/IReturnStatmentDeleteCategory';
 import UpdateCategoryDTO from '../../dto/UpdateCategoryDTO';
 import CreateCategoryService from '../../services/createCategory.service';
 import DeleteCategoryService from '../../services/deleteCategory.service';
@@ -115,7 +116,9 @@ class CategoryController {
   @ApiInternalServerErrorResponse({
     description: 'Error intern in server, please try again',
   })
-  deleteCategory(@Param('id') id: number): Promise<boolean> {
+  deleteCategory(
+    @Param('id') id: number,
+  ): Promise<IReturnStatmentDeleteCategory> {
     return this.deleteCategoryService.execute(id);
   }
 }
